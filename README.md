@@ -12,5 +12,5 @@ import (
 ```
 
 ```
-gumroad.VerifyLicense(productPermalink, licenseKey, incrementUsesCount)
+err := gumroad.VerifyLicense(productPermalink, licenseKey, incrementUsesCount)
 ```
