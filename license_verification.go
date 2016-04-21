@@ -35,11 +35,6 @@ type LicenseResponse struct {
 	}
 }
 
-// curl
-//   \ -d "product_permalink=QMGY"
-//   \ -d "license_key=YOUR_CUSTOMERS_LICENSE_KEY"
-//   \ -X POST
-
 // productPermalink (the unique permalink of the product)
 // licensekey (the license key provided by your customer)
 // incrementUsesCount ("true"/"false", optional, default: "true")
