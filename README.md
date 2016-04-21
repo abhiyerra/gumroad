@@ -13,4 +13,9 @@ import (
 
 ```
 err := gumroad.VerifyLicense(productPermalink, licenseKey, incrementUsesCount)
+if err != nil {
+     // Verification failed
+}
+
+// All good
 ```
