@@ -1,2 +1,10 @@
 # gumroad
-Golang API for Gumroad License Key Validation
+
+Golang API to verify that Gumroad License Keys are valid.
+
+
+## Usage
+
+```
+gumroad.VerifyLicense(productPermalink, licenseKey, incrementUsesCount)
+```
