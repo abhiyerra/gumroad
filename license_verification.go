@@ -11,8 +11,11 @@ import (
 )
 
 type LicenseResponse struct {
-	Success  bool `json:"success"`
-	Uses     int  `json:"uses"`
+	Success bool `json:"success"`
+	Uses    int  `json:"uses"`
+
+	Message string `json:"message"`
+
 	Purchase struct {
 		ID          string `json:"id"`
 		ProductName string `json:"product_name"`
@@ -49,16 +52,27 @@ func VerifyLicense(productPermalink, licenseKey string, incrementUsesCount bool)
 			"license_key":          {licenseKey},
 			"increment_uses_count": {strconv.FormatBool(incrementUsesCount)},
 		})
-
 	if err != nil {
 		return err
 	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+
 	json.Unmarshal(body, &response)
 	if err != nil {
 		return err
+	}
+
+	if resp.StatusCode == 404 {
+		return errors.New("gumroad: " + response.Message)
+	}
+
+	if !response.Success {
+		return errors.New("gumroad: not a successful response")
 	}
 
 	if response.Purchase.Refunded {
